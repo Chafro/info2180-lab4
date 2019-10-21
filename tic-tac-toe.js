@@ -1,3 +1,4 @@
+window.onload = function() {
 document.getElementsByTagName("button")[0].onclick = squares;
 var state = 0;
 var gstatus=[];
@@ -108,4 +109,5 @@ function win(stat){
 		document.getElementById("status").innerHTML="Congratulations! O is the Winner!";
 		document.getElementById("status").setAttribute("class", "you-won");
 	}
+}
 }
