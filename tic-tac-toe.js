@@ -11,11 +11,12 @@ window.onload = function() {
   			document.getElementsByTagName("div")[number].innerHTML="";
   			document.getElementById("status").innerHTML="Move your mouse over a square and click to play an X or an O.";
 			document.getElementById("status").setAttribute("class", "");
+			
 
-  	}
-  	move_count=0;
-  	state = 0;
-  	gstatus=[2,2,2,2,2,2,2,2,2];
+  		}
+  		move_count=0;
+  		state = 0;
+  		gstatus=[2,2,2,2,2,2,2,2,2];
 	}
 	function play(num){
 		if (document.getElementsByTagName("div")[num].className != "square O" && document.getElementsByTagName("div")[num].className != "square X"){
@@ -29,20 +30,22 @@ window.onload = function() {
 	}
 	function addXorO(num){
 		if (move_count<9) {
-			if (state==0){
-				document.getElementsByTagName("div")[num].setAttribute("class", "square X");
-				document.getElementsByTagName("div")[num].innerHTML="X";
-				wincheck(state);	
-				state=1;
-				move_count++;
-			}
-			else{
-				if (state==1) {
-					document.getElementsByTagName("div")[num].setAttribute("class", "square O");
-					document.getElementsByTagName("div")[num].innerHTML="O";
+			if (document.getElementsByTagName("div")[num].className=="square hover"){
+				if (state==0){
+					document.getElementsByTagName("div")[num].setAttribute("class", "square X");
+					document.getElementsByTagName("div")[num].innerHTML="X";
 					wincheck(state);	
-					state=0;
+					state=1;
 					move_count++;
+					}
+				else{
+					if (state==1) {
+						document.getElementsByTagName("div")[num].setAttribute("class", "square O");
+						document.getElementsByTagName("div")[num].innerHTML="O";
+						wincheck(state);	
+						state=0;
+						move_count++;
+					}
 				}
 			}
 		}
@@ -127,15 +130,23 @@ window.onload = function() {
 		}
 	}
 	function hover(num){	
-		if (document.getElementsByTagName("div")[num].className!="square O" && document.getElementsByTagName("div")[num].className!="square X") {
-
+		if (document.getElementsByTagName("div")[num].className=="square O") {
+			document.getElementsByTagName("div")[num].classList.remove("O");
+			document.getElementsByTagName("div")[num].classList.add("hover", "O");	
+		}
+		else{
 			document.getElementsByTagName("div")[num].classList.add("hover");
 		}
 	}
 	function hoverO(num){
-		if (document.getElementsByTagName("div")[num].className!="square O" && document.getElementsByTagName("div")[num].className!="square X") {
-			document.getElementsByTagName("div")[num].classList.remove("hover");
-			document.getElementsByTagName("div")[num].classList.add("hover O");		
+		if (document.getElementsByTagName("div")[num].className=="square hover O"){
+			document.getElementsByTagName("div")[num].classList.remove("hover", "O");
+			document.getElementsByTagName("div")[num].classList.add("O");
+		}	
+		else{
+
+			document.getElementsByTagName("div")[num].classList.remove("hover");		
 		}
+		
 	}
 }
